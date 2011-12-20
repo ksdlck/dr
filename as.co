@@ -30,10 +30,9 @@ class DR
       if not dep.proc or dep.rem !== undefined
         dep.@@deps.push tag
         rem++
+    task.rem = rem
     if 0 === rem
       nextTick task.proc
-    else
-      task.rem = rem
 
 if exports?
   exports.DR = DR
