@@ -4,7 +4,7 @@ if process and process.nextTick
 else
   nextTick := (fn) -> setTimeout fn, 0
 
-class DepRunner
+class DR
   !->
     @tasks = {}
     @res = {}
@@ -16,7 +16,6 @@ class DepRunner
     task = @tasks@[tag]
     task.proc = !~>
       proc (!(res) ~>
-        console.log "task #tag completed"
         delete task.rem
         @res[tag] = res if res !== undefined
         if task.deps
@@ -27,7 +26,6 @@ class DepRunner
           delete task.deps), @res
     rem = 0
     for deptag of args
-      console.log "adding dependency #deptag"
       dep = @tasks@[deptag]
       if not dep.proc or dep.rem !== undefined
         dep.@@deps.push tag
@@ -38,4 +36,4 @@ class DepRunner
       task.rem = rem
 
 if exports?
-  exports.DepRunner = DepRunner
+  exports.DR = DR
