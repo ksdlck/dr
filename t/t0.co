@@ -1,7 +1,7 @@
 util = require "util"
 as = require "../as"
 
-dr = new as.DepRunner
+dr = new as.DR
 dr.run \a, (!(cb) -> console.log \a; cb ()), \b, \c
 console.log util.inspect dr
 dr.run \b, (!(cb) -> console.log \b; cb ()), \c
