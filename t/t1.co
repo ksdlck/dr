@@ -1,0 +1,10 @@
+util = require "util"
+as = require "../as"
+
+dr = new as.DR
+dr.run \a, (!(cb) -> console.log \a; setTimeout cb, 1000)
+console.log util.inspect dr
+dr.run \b, (!(cb) -> console.log \b; cb ()), \c
+console.log util.inspect dr
+dr.run \c, (!(cb) -> console.log \c; cb ()), \a
+console.log util.inspect dr
