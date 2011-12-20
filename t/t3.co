@@ -1,0 +1,25 @@
+Dr = require "../dr"
+
+class Sr
+  !(@dr, @pfx) ->
+    @seq = 0
+  run: !(tag, proc, ...deps) ->
+    nproc = !(done) ~>
+      @dr.run tag, proc
+      done ()
+    @dr.run "#{@pfx}#{@seq++}", nproc, ...deps
+
+dr = new Dr
+sr = new Sr dr, \seq-
+
+sr.run \a, (!(done) ->
+  console.log \a
+  done ()), \c
+
+sr.run \b, (!(done) ->
+  console.log \b
+  done ()), \a
+
+sr.run \c, !(done) ->
+  console.log \c
+  done ()

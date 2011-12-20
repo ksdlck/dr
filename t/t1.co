@@ -1,7 +1,7 @@
 util = require "util"
-as = require "../as"
+Dr = require "../dr"
 
-dr = new as.DR
+dr = new Dr
 dr.run \a, (!(cb) -> console.log \a; setTimeout cb, 1000)
 console.log util.inspect dr
 dr.run \b, (!(cb) -> console.log \b; cb ()), \c
