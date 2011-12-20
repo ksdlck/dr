@@ -1,0 +1,41 @@
+nextTick = null
+if process and process.nextTick
+  nextTick := process.nextTick
+else
+  nextTick := (fn) -> setTimeout fn, 0
+
+class DepRunner
+  !->
+    @tasks = {}
+    @res = {}
+  run: !(tag, ...args) ->
+    if typeof tag === "function"
+      proc = tag
+    else
+      proc = args.shift ()
+    task = @tasks@[tag]
+    task.proc = !~>
+      proc (!(res) ~>
+        console.log "task #tag completed"
+        delete task.rem
+        @res[tag] = res if res !== undefined
+        if task.deps
+          for deptag of task.deps
+            dep = @tasks[deptag]
+            if 0 == --dep.rem
+              nextTick dep.proc
+          delete task.deps), @res
+    rem = 0
+    for deptag of args
+      console.log "adding dependency #deptag"
+      dep = @tasks@[deptag]
+      if not dep.proc or dep.rem !== undefined
+        dep.@@deps.push tag
+        rem++
+    if 0 === rem
+      nextTick task.proc
+    else
+      task.rem = rem
+
+if exports?
+  exports.DepRunner = DepRunner
