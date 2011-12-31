@@ -1,4 +1,4 @@
-Dr = require "../dr"
+Dr = require "../dr" .Dr
 
 class Qr
   !(@dr) ->

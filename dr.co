@@ -1,0 +1,31 @@
+exports = window.dr = {} if typeof exports is \undefined
+nextTick = if typeof process is \object and typeof process.nextTick is \function
+  then process.nextTick else !(fn) -> setTimeout fn, 0
+
+class Dr
+  !->
+    @tasks = {}
+    @res = {}
+  run: !(tag, proc, ...deps) ->
+    task = @tasks@[tag]
+    task.proc = !~>
+      proc (!(res) ~>
+        delete task.rem
+        @res[tag] = res if res !== undefined
+        if task.deps
+          for deptag of task.deps
+            dep = @tasks[deptag]
+            if 0 == --dep.rem
+              nextTick dep.proc
+          delete task.deps), @res
+    rem = 0
+    for deptag of deps
+      dep = @tasks@[deptag]
+      if not dep.proc or dep.rem !== undefined
+        dep.@@deps.push tag
+        rem++
+    task.rem = rem
+    if 0 === rem
+      nextTick task.proc
+
+exports.Dr = Dr
