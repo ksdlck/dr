@@ -1,12 +1,4 @@
-Dr = require "../dr" .Dr
-
-class Qr
-  !(@dr) ->
-  run: !(tag, ...args) ->
-    if @last
-      args.push @last
-    @last = tag
-    @dr.run tag, ...args
+{Dr, Qr} = require "../dr"
 
 dr = new Dr
 qr = new Qr dr

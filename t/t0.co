@@ -1,5 +1,4 @@
-util = require "util"
-Dr = require "../dr" .Dr
+{Dr} = require "../dr"
 
 dr = new Dr
 dr.run \a, (!(cb) -> console.log \a; cb ()), \b, \c
