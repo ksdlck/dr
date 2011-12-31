@@ -3,8 +3,5 @@ Dr = require "../dr" .Dr
 
 dr = new Dr
 dr.run \a, (!(cb) -> console.log \a; cb ()), \b, \c
-console.log util.inspect dr
 dr.run \b, (!(cb) -> console.log \b; cb ()), \c
-console.log util.inspect dr
 dr.run \c, (!(cb) -> console.log \c; cb ())
-console.log util.inspect dr
