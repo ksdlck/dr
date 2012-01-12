@@ -1,0 +1,20 @@
+{Dr, Qr} = require "../dr"
+
+dr = new Dr
+qr = new Qr dr
+
+dr.run \x, (!(done) ->
+  console.log \x
+  done ()), \a, \b
+
+qr.run \a, !(done) ->
+  console.log \a
+  done ()
+
+qr.run \b, !(done) ->
+  console.log \b
+  done ()
+
+qr.run \c, (!(done) ->
+  console.log \c
+  done ()), \x

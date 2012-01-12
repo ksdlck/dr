@@ -1,0 +1,16 @@
+{
+  "author": "Karel Sedláček <k@ksdlck.com> (http://ksdlck.com)",
+  "name": "dr",
+  "description": "Dependency-oriented task runner",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ksdlck/dr",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ksdlck/dr.git"
+  },
+  "engines": {
+    "node": "~0.6.7"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

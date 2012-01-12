@@ -1,0 +1,6 @@
+{Dr} = require "../dr"
+
+dr = new Dr
+dr.run \a, (!(cb) -> console.log \a; setTimeout cb, 1000)
+dr.run \b, (!(cb) -> console.log \b; cb ()), \c
+dr.run \c, (!(cb) -> console.log \c; cb ()), \a
